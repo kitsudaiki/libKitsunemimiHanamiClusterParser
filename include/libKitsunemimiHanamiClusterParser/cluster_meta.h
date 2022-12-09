@@ -20,7 +20,25 @@ namespace Kitsunemimi
 namespace Hanami
 {
 
-struct ClusterMeta;
+struct ClusterConnection
+{
+    std::string sourceBrick = "";
+    std::string targetCluster = "";
+    std::string targetBrick = "";
+};
+
+struct SegmentConnectionMeta
+{
+    std::string name = "";
+    std::string type = "";
+    std::vector<ClusterConnection> outputs;
+};
+
+struct ClusterMeta
+{
+    uint32_t version = 0;
+    std::vector<SegmentConnectionMeta> segments;
+};
 
 bool
 parseCluster(ClusterMeta* result,

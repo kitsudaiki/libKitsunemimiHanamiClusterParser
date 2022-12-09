@@ -40,14 +40,13 @@ public:
     void error(const Kitsunemimi::Hanami::location &location,
                const std::string& message);
 
-    bool dryRun = false;
+    ClusterMeta* output = nullptr;
 
 private:
     ClusterParserInterface(const bool traceParsing = false);
 
     static ClusterParserInterface* m_instance;
 
-    ClusterMeta* m_output = nullptr;
     std::string m_errorMessage = "";
     std::string m_inputString = "";
     std::mutex m_lock;

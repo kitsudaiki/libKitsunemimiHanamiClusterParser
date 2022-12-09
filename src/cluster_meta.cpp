@@ -14,11 +14,6 @@ namespace Kitsunemimi
 namespace Hanami
 {
 
-struct ClusterMeta
-{
-
-};
-
 /**
  * @brief convert a cluster-formated string into a cluster-object-tree
  *
