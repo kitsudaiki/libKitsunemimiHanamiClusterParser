@@ -1,13 +1,14 @@
-# libkitsunemimiHanamiClusterParser
+# libKitsunemimiHanamiClusterParser
 
-![Github workfloat status](https://img.shields.io/github/workflow/status/kitsudaiki/libkitsunemimiHanamiClusterParser/build-and-test/develop?label=build%20and%20test&style=flat-square)
-![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/kitsudaiki/libkitsunemimiHanamiClusterParser?label=version&style=flat-square)
-![GitHub](https://img.shields.io/github/license/kitsudaiki/libkitsunemimiHanamiClusterParser?style=flat-square)
+![Github workfloat status](https://img.shields.io/github/workflow/status/kitsudaiki/libKitsunemimiHanamiClusterParser/build-and-test/develop?label=build%20and%20test&style=flat-square)
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/kitsudaiki/libKitsunemimiHanamiClusterParser?label=version&style=flat-square)
+![GitHub](https://img.shields.io/github/license/kitsudaiki/libKitsunemimiHanamiClusterParser?style=flat-square)
 ![C++Version](https://img.shields.io/badge/c%2B%2B-17-blue?style=flat-square)
 ![Platform](https://img.shields.io/badge/platform-Linux--x64-lightgrey?style=flat-square)
 
 ## Description
 
+Parser-library for the cluster-templates of [KyoukoMind](https://github.com/kitsudaiki/KyoukoMind).
 
 ## Build
 
@@ -55,14 +56,10 @@ It create automatic a `build` and `result` directory in the directory, where you
 
 Tested on Debian and Ubuntu. If you use Centos, Arch, etc and the build-script fails on your machine, then please write me a mail and I will try to fix the script.
 
-
-## Usage
-
-
 ## Contributing
 
 Please give me as many inputs as possible: Bugs, bad code style, bad documentation and so on.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details
+This project is licensed under the Apache License Version 2.0 - see the [LICENSE](LICENSE) file for details
