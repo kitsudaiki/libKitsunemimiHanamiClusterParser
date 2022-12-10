@@ -1,5 +1,5 @@
 /**
- * @file       segment_parsestring_test.cpp
+ * @file       cluster_parsestring_test.cpp
  *
  * @author     Tobias Anker <tobias.anker@kitsunemimi.moe>
  *
