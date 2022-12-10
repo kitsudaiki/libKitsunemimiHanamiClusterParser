@@ -94,8 +94,8 @@ YY_DECL;
 %token <double> FLOAT "float"
 
 %type  <std::string> string_ident
-%type  <std::vector<Kitsunemimi::Hanami::SegmentConnectionMeta>> segments
-%type  <Kitsunemimi::Hanami::SegmentConnectionMeta> segment
+%type  <std::vector<Kitsunemimi::Hanami::SegmentMetaPtr>> segments
+%type  <Kitsunemimi::Hanami::SegmentMetaPtr> segment
 %type  <std::vector<Kitsunemimi::Hanami::ClusterConnection>> outputs
 %type  <Kitsunemimi::Hanami::ClusterConnection> output
 
@@ -133,7 +133,7 @@ segments:
 |
     segment
     {
-        std::vector<SegmentConnectionMeta> outputs;
+        std::vector<SegmentMetaPtr> outputs;
         outputs.push_back($1);
         $$ = outputs;
     }
@@ -147,7 +147,7 @@ segment:
             return 1;
         }
 
-        SegmentConnectionMeta segment;
+        SegmentMetaPtr segment;
         segment.type = $1;
         segment.name = $5;
         segment.outputs = $7;
@@ -162,7 +162,7 @@ segment:
             return 1;
         }
 
-        SegmentConnectionMeta segment;
+        SegmentMetaPtr segment;
         segment.type = $1;
         segment.name = $5;
         $$ = segment;
@@ -186,7 +186,7 @@ output:
     "out" ":" "->" string_ident ":" string_ident linebreaks_eno
     {
         ClusterConnection connection;
-        connection.sourceBrick = "input";
+        connection.sourceBrick = "x";
         connection.targetCluster = $4;
         connection.targetBrick = $6;
         $$ = connection;
@@ -197,7 +197,7 @@ output:
         ClusterConnection connection;
         connection.sourceBrick = $3;
         connection.targetCluster = $5;
-        connection.targetBrick = "output";
+        connection.targetBrick = "x";
         $$ = connection;
     }
 |

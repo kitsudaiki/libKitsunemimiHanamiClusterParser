@@ -37,11 +37,11 @@ namespace Hanami
 struct ClusterConnection
 {
     std::string sourceBrick = "";
-    std::string targetCluster = "";
+    std::string targetSegment = "";
     std::string targetBrick = "";
 };
 
-struct SegmentConnectionMeta
+struct SegmentMetaPtr
 {
     std::string name = "";
     std::string type = "";
@@ -51,7 +51,21 @@ struct SegmentConnectionMeta
 struct ClusterMeta
 {
     uint32_t version = 0;
-    std::vector<SegmentConnectionMeta> segments;
+    std::vector<SegmentMetaPtr> segments;
+
+    SegmentMetaPtr*
+    getSegmentConnectionMeta(const std::string &name)
+    {
+        SegmentMetaPtr* tempConnection = nullptr;
+        for(uint64_t i = 0; i < segments.size(); i++)
+        {
+            tempConnection = &segments[i];
+            if(tempConnection->name == name) {
+                return tempConnection;
+            }
+        }
+        return tempConnection;
+    }
 };
 
 bool
