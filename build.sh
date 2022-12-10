@@ -95,9 +95,9 @@ get_required_kitsune_lib_repo "libKitsunemimiCommon" "develop" 4
 #-----------------------------------------------------------------------------------------------------------------
 
 if [ $1 = "test" ]; then
-    build_kitsune_lib_repo "lKitsunemimiHanamiClusterParser" 1 "run_tests"
+    build_kitsune_lib_repo "libKitsunemimiHanamiClusterParser" 1 "run_tests"
 else
-    build_kitsune_lib_repo "lKitsunemimiHanamiClusterParser" 1 ""
+    build_kitsune_lib_repo "libKitsunemimiHanamiClusterParser" 1 ""
 fi
 
 #-----------------------------------------------------------------------------------------------------------------
