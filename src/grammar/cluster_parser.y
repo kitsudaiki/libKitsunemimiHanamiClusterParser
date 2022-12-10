@@ -187,7 +187,7 @@ output:
     {
         ClusterConnection connection;
         connection.sourceBrick = "x";
-        connection.targetCluster = $4;
+        connection.targetSegment = $4;
         connection.targetBrick = $6;
         $$ = connection;
     }
@@ -196,7 +196,7 @@ output:
     {
         ClusterConnection connection;
         connection.sourceBrick = $3;
-        connection.targetCluster = $5;
+        connection.targetSegment = $5;
         connection.targetBrick = "x";
         $$ = connection;
     }
@@ -205,7 +205,7 @@ output:
     {
         ClusterConnection connection;
         connection.sourceBrick = $3;
-        connection.targetCluster = $5;
+        connection.targetSegment = $5;
         connection.targetBrick = $7;
         $$ = connection;
     }
