@@ -19,3 +19,76 @@ jobs:
         run:  |
           cd ${GITHUB_REPOSITORY#*/}
           ./build.sh test
+      - name: "Copy files"
+        run: |
+          mkdir /build_result
+          cp -r result/* /build_result/
+          cp build/${GITHUB_REPOSITORY#*/}/tests/unit_tests/unit_tests /build_result/
+          cp build/${GITHUB_REPOSITORY#*/}/tests/memory_leak_tests/memory_leak_tests /build_result/
+      - name: "Check target-directory"
+        run: ls -l /build_result
+      - name: Create artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: result
+          path: /build_result
+
+  unit_tests:
+    needs: build
+    runs-on: ubuntu-latest
+    container: 
+      image: registry.gitlab.com/kitsudaiki/kitsunemimi-ci-docker-images/normal-tests:1.2.0
+    name: unit-test-job
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v3
+      - name: "Check directory"
+        run: ls -l ./
+      - name: Get artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: result
+          path: /build_result
+      - name: "Check target-directory"
+        run: ls -l /build_result
+      - name: "Run test"
+        run: |
+          chmod +x /build_result/unit_tests
+          /build_result/unit_tests
+  memory_leak_test:
+    needs: build
+    runs-on: ubuntu-latest
+    container: 
+      image: registry.gitlab.com/kitsudaiki/kitsunemimi-ci-docker-images/normal-tests:1.2.0
+      volumes:
+        - build_result:/build_result
+    name: memory-leak-test-job
+    steps:
+      - name: "Checkout repository"
+        uses: actions/checkout@v3
+      - name: "Check directory"
+        run: ls -l ./
+      - name: Get artifact
+        uses: actions/download-artifact@v3
+        with:
+          name: result
+          path: /build_result
+      - name: "Check target-directory"
+        run: ls -l /build_result
+      - name: "Run test"
+        run: |
+          chmod +x /build_result/memory_leak_tests
+          /build_result/memory_leak_tests
+
+  cleanup:
+    needs: [unit_tests, memory_leak_test]
+    runs-on: ubuntu-latest
+    container:
+      image: registry.gitlab.com/kitsudaiki/kitsunemimi-ci-docker-images/normal-tests:1.2.0
+    name: cleanup-job
+    steps:
+      - name: "Delete artifacts"
+        uses: geekyeggo/delete-artifact@v2
+        with:
+          name: result
+
