@@ -47,13 +47,15 @@ blank [ \t]
     clusterloc.step();
 %}
 
-{blank}+   clusterloc.step();
-[\n]       {clusterloc.lines(1); return Kitsunemimi::Hanami::ClusterParser::make_LINEBREAK (clusterloc); }
-":"        return Kitsunemimi::Hanami::ClusterParser::make_ASSIGN (clusterloc);
-"->"       return Kitsunemimi::Hanami::ClusterParser::make_ARROW (clusterloc);
-"out"      return Kitsunemimi::Hanami::ClusterParser::make_OUT (clusterloc);
-"name"     return Kitsunemimi::Hanami::ClusterParser::make_NAME (clusterloc);
-"segments" return Kitsunemimi::Hanami::ClusterParser::make_SEGMENTS (clusterloc);
+{blank}+       clusterloc.step();
+[\n]           {clusterloc.lines(1); return Kitsunemimi::Hanami::ClusterParser::make_LINEBREAK (clusterloc); }
+"version:1"    return Kitsunemimi::Hanami::ClusterParser::make_VERSION_1 (clusterloc);
+"version: 1"   return Kitsunemimi::Hanami::ClusterParser::make_VERSION_1 (clusterloc);
+":"            return Kitsunemimi::Hanami::ClusterParser::make_ASSIGN (clusterloc);
+"->"           return Kitsunemimi::Hanami::ClusterParser::make_ARROW (clusterloc);
+"out"          return Kitsunemimi::Hanami::ClusterParser::make_OUT (clusterloc);
+"name"         return Kitsunemimi::Hanami::ClusterParser::make_NAME (clusterloc);
+"segments"     return Kitsunemimi::Hanami::ClusterParser::make_SEGMENTS (clusterloc);
 
 \"(\\.|[^"\\])*\" { return Kitsunemimi::Hanami::ClusterParser::make_STRING(yytext, clusterloc); }
 

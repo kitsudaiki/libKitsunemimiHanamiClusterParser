@@ -94,15 +94,13 @@ YY_DECL;
 // segments:
 //     input
 //         name: input
-//         out:
-//             -> central : test_input
+//         out: -> central : test_input
 //
 //     example_segment
 //         name: central
-//         out:
-//             test_output -> output
+//         out:  test_output -> output
 //
-//     output:
+//     output
 //         name: output
 
 startpoint:
@@ -127,12 +125,32 @@ segments:
     }
 
 segment:
-    string_ident linebreaks "name" ":" string_ident linebreaks "out" ":" outputs
+    string_ident linebreaks "name" ":" string_ident linebreaks outputs
     {
+        if($1 == "output")
+        {
+            driver.error(yyla.location, "Output-segments are not allowed to have any outputs.");
+            return 1;
+        }
+
         SegmentConnectionMeta segment;
         segment.type = $1;
         segment.name = $5;
-        segment.outputs = $9;
+        segment.outputs = $7;
+        $$ = segment;
+    }
+|
+    string_ident linebreaks "name" ":" string_ident linebreaks
+    {
+        if($1 == "input")
+        {
+            driver.error(yyla.location, "Input-segments must have at least one output.");
+            return 1;
+        }
+
+        SegmentConnectionMeta segment;
+        segment.type = $1;
+        segment.name = $5;
         $$ = segment;
     }
 
@@ -151,30 +169,30 @@ outputs:
     }
 
 output:
-    "->" string_ident ":" string_ident linebreaks_eno
+    "out" ":" "->" string_ident ":" string_ident linebreaks_eno
     {
         ClusterConnection connection;
         connection.sourceBrick = "input";
-        connection.targetCluster = $2;
-        connection.targetBrick = $4;
+        connection.targetCluster = $4;
+        connection.targetBrick = $6;
         $$ = connection;
     }
 |
-    string_ident "->" string_ident linebreaks_eno
+    "out" ":" string_ident "->" string_ident linebreaks_eno
     {
         ClusterConnection connection;
-        connection.sourceBrick = $1;
-        connection.targetCluster = $3;
+        connection.sourceBrick = $3;
+        connection.targetCluster = $5;
         connection.targetBrick = "output";
         $$ = connection;
     }
 |
-    string_ident "->" string_ident ":" string_ident linebreaks_eno
+    "out" ":" string_ident "->" string_ident ":" string_ident linebreaks_eno
     {
         ClusterConnection connection;
-        connection.sourceBrick = $1;
-        connection.targetCluster = $3;
-        connection.targetBrick = $5;
+        connection.sourceBrick = $3;
+        connection.targetCluster = $5;
+        connection.targetBrick = $7;
         $$ = connection;
     }
 

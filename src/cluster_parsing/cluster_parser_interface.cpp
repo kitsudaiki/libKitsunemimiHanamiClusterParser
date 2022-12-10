@@ -89,7 +89,6 @@ ClusterParserInterface::parse(ClusterMeta* result,
             || m_errorMessage.size() > 0)
     {
         error.addMeesage(m_errorMessage);
-        LOG_ERROR(error);
         return false;
     }
 
