@@ -69,7 +69,7 @@ Cluster_ParseString_Test::parseString_test()
     TEST_EQUAL(result.segments.at(0).type, "input");
     TEST_EQUAL(result.segments.at(0).name, "input1");
     TEST_EQUAL(result.segments.at(0).outputs.size(), 1);
-    TEST_EQUAL(result.segments.at(0).outputs.at(0).sourceBrick, "input");
+    TEST_EQUAL(result.segments.at(0).outputs.at(0).sourceBrick, "x");
     TEST_EQUAL(result.segments.at(0).outputs.at(0).targetSegment, "central");
     TEST_EQUAL(result.segments.at(0).outputs.at(0).targetBrick, "test_input");
 
@@ -78,10 +78,10 @@ Cluster_ParseString_Test::parseString_test()
     TEST_EQUAL(result.segments.at(1).outputs.size(), 2);
     TEST_EQUAL(result.segments.at(1).outputs.at(0).sourceBrick, "test_output");
     TEST_EQUAL(result.segments.at(1).outputs.at(0).targetSegment, "output");
-    TEST_EQUAL(result.segments.at(1).outputs.at(0).targetBrick, "output");
+    TEST_EQUAL(result.segments.at(1).outputs.at(0).targetBrick, "x");
     TEST_EQUAL(result.segments.at(1).outputs.at(1).sourceBrick, "test_output2");
     TEST_EQUAL(result.segments.at(1).outputs.at(1).targetSegment, "output2");
-    TEST_EQUAL(result.segments.at(1).outputs.at(1).targetBrick, "output");
+    TEST_EQUAL(result.segments.at(1).outputs.at(1).targetBrick, "x");
 
     TEST_EQUAL(result.segments.at(2).type, "output");
     TEST_EQUAL(result.segments.at(2).name, "output1");
