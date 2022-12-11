@@ -54,7 +54,7 @@ struct ClusterMeta
     std::vector<SegmentMetaPtr> segments;
 
     SegmentMetaPtr*
-    getSegmentConnectionMeta(const std::string &name)
+    getSegmentMetaPtr(const std::string &name)
     {
         SegmentMetaPtr* tempConnection = nullptr;
         for(uint64_t i = 0; i < segments.size(); i++)
