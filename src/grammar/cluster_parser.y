@@ -139,7 +139,7 @@ segments:
     }
 
 segment:
-    string_ident linebreaks "name" ":" string_ident linebreaks outputs
+    string_ident linebreaks "name" ":" string_ident linebreaks_eno outputs
     {
         if($1 == "output")
         {
@@ -154,7 +154,7 @@ segment:
         $$ = segment;
     }
 |
-    string_ident linebreaks "name" ":" string_ident linebreaks
+    string_ident linebreaks "name" ":" string_ident linebreaks_eno
     {
         if($1 == "input")
         {
